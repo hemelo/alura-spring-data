@@ -3,38 +3,36 @@ package br.com.alura.springdata;
 import java.util.Scanner;
 
 import br.com.alura.springdata.service.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@EnableJpaRepositories
 @SpringBootApplication
+@EnableJpaRepositories
 public class SpringDataApplication implements CommandLineRunner {
 
 	private Boolean system = true;
 
-	private final CrudCargo cargoService;
+	@Autowired
+	private CrudCargo crudCargo;
 
-	private final Relatorios relatoriosService;
+	@Autowired
+	private Relatorios relatorios;
 
-	private final CrudFuncionario funcionarioService;
+	@Autowired
+	private CrudFuncionario crudFuncionario;
 
-	private final CrudUnidadeTrabalho unidadeTrabalhoService;
+	@Autowired
+	private CrudUnidadeTrabalho crudUnidadeTrabalho;
 
-	private final RelatorioFuncionarioDinamico relatorioFuncionarioDinamico;
+	@Autowired
+	private RelatorioFuncionarioDinamico relatorioFuncionarioDinamico;
 
-	public SpringDataApplication(CrudCargo cargoService,
-								 Relatorios relatoriosService,
-								 CrudFuncionario funcionarioService,
-								 CrudUnidadeTrabalho unidadeTrabalhoService,
-								 RelatorioFuncionarioDinamico relatorioFuncionarioDinamico) {
-		this.cargoService = cargoService;
-		this.relatoriosService = relatoriosService;
-		this.funcionarioService = funcionarioService;
-		this.unidadeTrabalhoService = unidadeTrabalhoService;
-		this.relatorioFuncionarioDinamico = relatorioFuncionarioDinamico;
-	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringDataApplication.class, args);
@@ -58,16 +56,16 @@ public class SpringDataApplication implements CommandLineRunner {
 
 			switch (function) {
 				case 1:
-					cargoService.inicial(scanner);
+					crudCargo.inicial(scanner);
 					break;
 				case 2:
-					funcionarioService.inicial(scanner);
+					crudFuncionario.inicial(scanner);
 					break;
 				case 3:
-					unidadeTrabalhoService.inicial(scanner);
+					crudUnidadeTrabalho.inicial(scanner);
 					break;
 				case 4:
-					relatoriosService.inicial(scanner);
+					relatorios.inicial(scanner);
 					break;
 				case 5:
 					relatorioFuncionarioDinamico.inicial(scanner);
